@@ -3,19 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|c:\\users\\himanshu.y.sharma\\desktop\\visualstudioextensionmw\\mwadminrunner\\customeservice\\infodialogbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:customeservice\\infodialogbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|c:\\users\\himanshu.y.sharma\\desktop\\visualstudioextensionmw\\mwadminrunner\\vscommandtable.vsct||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\vscommandtable.vsct||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:vscommandtable.vsct||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|c:\\users\\himanshu.y.sharma\\desktop\\visualstudioextensionmw\\mwadminrunner\\commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|c:\\users\\himanshu.y.sharma\\desktop\\visualstudioextensionmw\\mwadminrunner\\mwadminrunnerpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\mwadminrunnerpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:mwadminrunnerpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,20 +34,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "InfoDialogBox.cs",
               "DocumentMoniker": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\CustomeService\\InfoDialogBox.cs",
               "RelativeDocumentMoniker": "CustomeService\\InfoDialogBox.cs",
               "ToolTip": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\CustomeService\\InfoDialogBox.cs",
               "RelativeToolTip": "CustomeService\\InfoDialogBox.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAIwDsAAAAQAAAA",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAAAEoAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-01T06:28:20.635Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "VSCommandTable.vsct",
               "DocumentMoniker": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\VSCommandTable.vsct",
               "RelativeDocumentMoniker": "VSCommandTable.vsct",
@@ -60,13 +60,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MyCommand.cs",
               "DocumentMoniker": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\Commands\\MyCommand.cs",
               "RelativeDocumentMoniker": "Commands\\MyCommand.cs",
               "ToolTip": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\Commands\\MyCommand.cs",
               "RelativeToolTip": "Commands\\MyCommand.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACEAAAARAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACkAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-01T05:53:55.8Z",
               "EditorCaption": ""
@@ -81,8 +81,7 @@
               "RelativeToolTip": "MWAdminRunnerPackage.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-01T05:53:45.361Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-01T05:53:45.361Z"
             }
           ]
         }

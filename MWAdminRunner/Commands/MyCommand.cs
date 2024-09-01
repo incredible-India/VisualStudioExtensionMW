@@ -32,6 +32,12 @@ namespace MWAdminRunner
             else
             {
                  bool isRequiredFilesAreThere  =ib.CheckingRequiredFileForModification(currentSolutionInfo);
+
+                if (isRequiredFilesAreThere) { }
+                else
+                {
+                    VS.MessageBox.ShowError("Kuch to Gadbad Hai", "Sorry Bro! something went wrong Please Contact at 8604470501 ");
+                }
             }
             
 
