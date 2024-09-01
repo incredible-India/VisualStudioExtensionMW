@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\MWAdminRunner.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\MWAdminRunner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\MWAdminRunner.csproj",
+        "projectName": "MWAdminRunner",
+        "projectPath": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\MWAdminRunner.csproj",
+        "packagesPath": "C:\\Users\\himanshu.y.sharma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\himanshu.y.sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\NuGet\\Config": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/incadeadev/_packaging/incadea_nuget%40Local/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "Community.VisualStudio.Toolkit.17": {
+              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[17.0.451, )"
+            },
+            "Community.VisualStudio.VSCT": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[16.0.29.6, )"
+            },
+            "Microsoft.VSSDK.BuildTools": {
+              "target": "Package",
+              "version": "[17.0.5232, )",
+              "generatePathProperty": true
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

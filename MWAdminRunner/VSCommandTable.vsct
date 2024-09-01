@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
+
+  <Commands package="MWAdminRunner">
+    <Groups>
+      <Group guid="MWAdminRunner" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="VSMainMenu" id="Tools"/>
+      </Group>
+    </Groups>
+
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <Button guid="MWAdminRunner" id="MiddlewareRunnerCommand" priority="0x0100" type="Button">
+        <Parent guid="MWAdminRunner" id="MyMenuGroup" />
+			  <Icon guid="ImageCatalogGuid" id="RunThread" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Run Middleware Locally</ButtonText>
+          <LocCanonicalName>.Tools.RunMW</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="MWAdminRunner" value="{2f88c61b-2e6e-47bb-a8f6-3e0742b90921}">
+      <IDSymbol name="MyMenuGroup" value="0x0001" />
+      <IDSymbol name="MiddlewareRunnerCommand" value="0x0100" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
