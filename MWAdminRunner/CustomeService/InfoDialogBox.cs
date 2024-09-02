@@ -20,6 +20,8 @@ namespace MWAdminRunner.CustomeService
         private readonly string[] RequiredProjects = new string[] { "incadea.api.middleware.admin", "incadea.api.middleware.web" };
         private readonly string[] RequiredFilesAdmin = new string[] { "appsettings.json","Program.cs", "Properties/launchSettings.json" };
         private readonly string[] RequiredFilesWeb = new string[] { "appsettings.json" };
+        private List<string>  RequiredFileToModifedForAdmin = new List<string> { };
+        private List<string> RequiredFileToModifedForWeb = new List<string> { };
 
         public InfoDialogBox(IVsSolution vsSolution)
         {
@@ -90,7 +92,10 @@ namespace MWAdminRunner.CustomeService
                                 var FilePathToCheckInsideProject = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[0]}").Replace('\\', '/');
                                 var isThere = File.Exists(FilePathToCheckInsideProject); 
                                 if(isThere)
+                                   {
                                     CountForAdmin++;
+                                    this.RequiredFileToModifedForAdmin.Add(FilePathToCheckInsideProject);
+                                }
                             }
                            
                         }
@@ -102,7 +107,10 @@ namespace MWAdminRunner.CustomeService
                                 var FilePathToCheckInsideProjectWeb = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[0]}").Replace('\\', '/');
                                 var isThereWeb = File.Exists(FilePathToCheckInsideProjectWeb);
                                 if(isThereWeb)
-                                    CountForWeb++;
+                                {
+                                   CountForWeb++;
+                                    this.RequiredFileToModifedForWeb.Add(FilePathToCheckInsideProjectWeb);
+                                }
                             }
 
                         }
@@ -132,6 +140,60 @@ namespace MWAdminRunner.CustomeService
          
 
 
+        }
+
+        //this method will modified the required files for mw and web
+        public bool RequiredFileModification()
+        {       
+            if (this.RequiredFileToModifedForWeb.Count == 0 && this.RequiredFileToModifedForAdmin.Count == 0 && this.RequiredFileToModifedForWeb.Count == this.RequiredFilesWeb.Length && this.RequiredFileToModifedForAdmin.Count==this.RequiredFilesAdmin.Length)
+            {
+                VS.MessageBox.ShowError("Dev Error", "Something got Wrong buddy!! This error can be understood  by the only stupid owner of this extension!! call him at 8604470501");
+                return false;
+            }
+            else
+            { //Modification For Admin Files
+                for(int i=0;i<this.RequiredFileToModifedForAdmin.Count;i++)
+                {
+                    for (int j = 0; j < this.RequiredFilesAdmin.Length; j++)
+                        if (string.Equals(Path.GetFileNameWithoutExtension(this.RequiredFileToModifedForAdmin[i]), this.RequiredFilesAdmin[j]))
+                        {
+                            //from here need to update
+                        }
+                }
+                return true;
+            }    
+         
+        }
+
+        private bool ModifyJsonFiles(string filepath)
+        {
+            {
+                string filePath = filepath;
+                string jsonString = File.ReadAllText(filePath);
+                JObject jsonObject = JObject.Parse(jsonString);
+                var connectionStrings = jsonObject["ConnectionStrings"] as JObject;
+                if (connectionStrings != null)
+                {
+                    var mappingDatabase = connectionStrings["MappingDatabase"]?.ToString();
+                    if (mappingDatabase != null)
+                    {
+                        string newConnectionString = mappingDatabase.Replace("Password=postgres", "Password=123");
+                        connectionStrings["MappingDatabase"] = newConnectionString;
+                        string updatedJsonString = jsonObject.ToString(Newtonsoft.Json.Formatting.Indented);
+                        File.WriteAllText(filePath, updatedJsonString);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            
+            }
         }
     }
 }
