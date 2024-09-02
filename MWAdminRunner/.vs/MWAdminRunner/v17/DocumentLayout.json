@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|c:\\users\\himanshu.y.sharma\\desktop\\visualstudioextensionmw\\mwadminrunner\\customeservice\\infodialogbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:customeservice\\infodialogbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|solutionrelative:commands\\mycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FDD319CA-CBDF-4E4E-8959-607791B69852}|MWAdminRunner.csproj|C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\vscommandtable.vsct||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,13 +34,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "InfoDialogBox.cs",
               "DocumentMoniker": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\CustomeService\\InfoDialogBox.cs",
               "RelativeDocumentMoniker": "CustomeService\\InfoDialogBox.cs",
-              "ToolTip": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\CustomeService\\InfoDialogBox.cs",
-              "RelativeToolTip": "CustomeService\\InfoDialogBox.cs",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAAAEoAAAAUAAAA",
+              "ToolTip": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\CustomeService\\InfoDialogBox.cs*",
+              "RelativeToolTip": "CustomeService\\InfoDialogBox.cs*",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAewGMAAABcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-01T06:28:20.635Z",
               "EditorCaption": ""
@@ -55,21 +55,19 @@
               "RelativeToolTip": "VSCommandTable.vsct",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
-              "WhenOpened": "2024-09-01T06:02:55.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-01T06:02:55.042Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MyCommand.cs",
               "DocumentMoniker": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\Commands\\MyCommand.cs",
               "RelativeDocumentMoniker": "Commands\\MyCommand.cs",
               "ToolTip": "C:\\Users\\himanshu.y.sharma\\Desktop\\VisualStudioExtensionMW\\MWAdminRunner\\Commands\\MyCommand.cs",
               "RelativeToolTip": "Commands\\MyCommand.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACkAAAAMAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-01T05:53:55.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-01T05:53:55.8Z"
             },
             {
               "$type": "Document",
