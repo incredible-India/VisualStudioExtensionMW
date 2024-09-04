@@ -34,4 +34,5 @@
       <IDSymbol name="MiddlewareRunnerCommand" value="0x0100" />
     </GuidSymbol>
   </Symbols>
+
 </CommandTable>

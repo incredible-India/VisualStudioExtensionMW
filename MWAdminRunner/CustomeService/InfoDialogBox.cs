@@ -5,6 +5,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,10 @@ namespace MWAdminRunner.CustomeService
         private readonly string[] RequiredProjects = new string[] { "incadea.api.middleware.admin", "incadea.api.middleware.web" };
         private readonly string[] RequiredFilesAdmin = new string[] { "appsettings.json","Program.cs", "Properties/launchSettings.json" };
         private readonly string[] RequiredFilesWeb = new string[] { "appsettings.json" };
+        private string postGresPassword = "HIMANSHUsharma@123";
         private List<string>  RequiredFileToModifedForAdmin = new List<string> { };
         private List<string> RequiredFileToModifedForWeb = new List<string> { };
+        private readonly string lineToCommentInProgrameCSFile = "builder.Services.AddHostedService<RunBackGroundJob>();";
 
         public InfoDialogBox(IVsSolution vsSolution)
         {
@@ -89,7 +92,7 @@ namespace MWAdminRunner.CustomeService
                         {
                             for (int j = 0; j < this.RequiredFilesAdmin.Length; j++)
                             {
-                                var FilePathToCheckInsideProject = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[0]}").Replace('\\', '/');
+                                var FilePathToCheckInsideProject = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[j]}").Replace('\\', '/');
                                 var isThere = File.Exists(FilePathToCheckInsideProject); 
                                 if(isThere)
                                    {
@@ -104,7 +107,7 @@ namespace MWAdminRunner.CustomeService
                         {
                             for (int j = 0; j < this.RequiredFilesWeb.Length; j++)
                             {
-                                var FilePathToCheckInsideProjectWeb = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[0]}").Replace('\\', '/');
+                                var FilePathToCheckInsideProjectWeb = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[j]}").Replace('\\', '/');
                                 var isThereWeb = File.Exists(FilePathToCheckInsideProjectWeb);
                                 if(isThereWeb)
                                 {
@@ -154,18 +157,52 @@ namespace MWAdminRunner.CustomeService
             { //Modification For Admin Files
                 for(int i=0;i<this.RequiredFileToModifedForAdmin.Count;i++)
                 {
-                    for (int j = 0; j < this.RequiredFilesAdmin.Length; j++)
-                        if (string.Equals(Path.GetFileNameWithoutExtension(this.RequiredFileToModifedForAdmin[i]), this.RequiredFilesAdmin[j]))
-                        {
-                            //from here need to update
+                    if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[0]))//appsettings.json
+                    {
+                        bool isModifiedJson=ModifyJsonFiles(this.RequiredFileToModifedForAdmin[i],this.postGresPassword);
+                    }
+                    else if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[1]))//Program.cs
+                    {
+                        var lines = File.ReadAllLines(RequiredFileToModifedForAdmin[i]);
+                        var modifiedLines = lines.Select(line =>
+                                                                    line.Contains(this.lineToCommentInProgrameCSFile) ? "// " + line : line).ToArray();
+
+                        // Write the modified lines back to the file
+                        File.WriteAllLines(RequiredFileToModifedForAdmin[i], modifiedLines);
+
+                    }
+                    else if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[2]))//Properties/launchSettings.json
+                    {
+                        //C:/Users/himanshu.y.sharma/Desktop/VisualStudioExtensionMW/MWAdminRunner/bin/Debug/Resoureces/IISExpress.json
+                        //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                        //var c = Directory.GetCurrentDirectory();
+                        //var c = Directory.Exists("./.");
+                        var jsonFileFromDataHastoBeTaken = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "IISExpress.json").Replace('\\', '/'); ;
+                        if (File.Exists(jsonFileFromDataHastoBeTaken))
+                       {
+                            string jsonContent = File.ReadAllText(jsonFileFromDataHastoBeTaken);
+                            File.WriteAllText(this.RequiredFileToModifedForAdmin[i], jsonContent);
                         }
+                        else
+                        {
+                            VS.MessageBox.ShowError("DEV Error", "Launchsettings.json content could not be found in code dir...stupid dev Yaar!!! he cant even handle proper file path.");
+                        }
+                       
+                    }
+                }
+                for (int i = 0; i < this.RequiredFileToModifedForWeb.Count; i++)
+                {
+                    if (this.RequiredFileToModifedForWeb[i].Contains(this.RequiredFilesWeb[0]))//appsettings.json
+                    {
+                        bool isModifiedJson = ModifyJsonFiles(this.RequiredFileToModifedForWeb[i], this.postGresPassword);
+                    }
                 }
                 return true;
             }    
          
         }
 
-        private bool ModifyJsonFiles(string filepath)
+        private bool ModifyJsonFiles(string filepath,string ModifiedValue)
         {
             {
                 string filePath = filepath;
@@ -177,7 +214,7 @@ namespace MWAdminRunner.CustomeService
                     var mappingDatabase = connectionStrings["MappingDatabase"]?.ToString();
                     if (mappingDatabase != null)
                     {
-                        string newConnectionString = mappingDatabase.Replace("Password=postgres", "Password=123");
+                        string newConnectionString = mappingDatabase.Replace("Password=postgres", $"Password={ModifiedValue}");
                         connectionStrings["MappingDatabase"] = newConnectionString;
                         string updatedJsonString = jsonObject.ToString(Newtonsoft.Json.Formatting.Indented);
                         File.WriteAllText(filePath, updatedJsonString);

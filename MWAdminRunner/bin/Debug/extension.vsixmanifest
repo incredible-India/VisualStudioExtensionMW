@@ -2,9 +2,10 @@
   <Metadata>
     <Identity Id="MWAdminRunner.0125b84c-5178-498d-bee9-7110abaf5f1a" Version="1.0" Language="en-US" Publisher="Himanshu kumar Sharma" />
     <DisplayName>MWAdminRunner</DisplayName>
-    <Description xml:space="preserve">This Will Run Middleware and WebApi Project Locally</Description>
+    <Description xml:space="preserve">This Will Run Middleware Project Locally</Description>
     <Icon>Resources\Icon.png</Icon>
     <PreviewImage>Resources\Icon.png</PreviewImage>
+    <Preview>true</Preview>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">

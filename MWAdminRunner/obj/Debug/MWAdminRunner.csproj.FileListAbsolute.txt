@@ -22,3 +22,4 @@ C:\Users\himanshu.y.sharma\Desktop\VisualStudioExtensionMW\MWAdminRunner\obj\Deb
 C:\Users\himanshu.y.sharma\Desktop\VisualStudioExtensionMW\MWAdminRunner\obj\Debug\extension.vsixmanifest
 C:\Users\himanshu.y.sharma\Desktop\VisualStudioExtensionMW\MWAdminRunner\obj\Debug\files.json
 C:\Users\himanshu.y.sharma\Desktop\VisualStudioExtensionMW\MWAdminRunner\obj\Debug\createTemplateManifests.cache
+C:\Users\himanshu.y.sharma\Desktop\VisualStudioExtensionMW\MWAdminRunner\bin\Debug\Resources\IISExpress.json
