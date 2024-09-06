@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.Shell.Interop;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio.Shell.Interop;
 using Newtonsoft.Json.Linq;
 using System;
 using System.CodeDom;
@@ -25,6 +27,7 @@ namespace MWAdminRunner.CustomeService
         private List<string>  RequiredFileToModifedForAdmin = new List<string> { };
         private List<string> RequiredFileToModifedForWeb = new List<string> { };
         private readonly string lineToCommentInProgrameCSFile = "builder.Services.AddHostedService<RunBackGroundJob>();";
+        private readonly string[] startUpProject = new string[] { "incadea.api.middleware.admin\\incadea.api.middleware.admin.csproj", "incadea.api.middleware.web\\incadea.api.middleware.web.csproj" };
 
         public InfoDialogBox(IVsSolution vsSolution)
         {
@@ -57,7 +60,7 @@ namespace MWAdminRunner.CustomeService
             //checking Weather SolutionFile is opend or not
             if (!string.Equals(middleWareSolutionFileName, GetSolutionName))
             {
-                VS.MessageBox.ShowWarning("SolutionFile Not Opend", $"Aree! Yaar, {middleWareSolutionFileName}.sln file  is not Opened,  Kindly Open it then perform the operation.. come on dude open it 😊 ");
+                VS.MessageBox.ShowWarning("SolutionFile Not Opend", $"Aree! Yaar, {middleWareSolutionFileName}.sln file  is not Opened,  Kindly Open it then perform the operation.. come on machha open it 😊 ");
                 return false;
             }
             string[] cProjects = new string[this.maxProjectInsideProject];
@@ -147,7 +150,8 @@ namespace MWAdminRunner.CustomeService
 
         //this method will modified the required files for mw and web
         public bool RequiredFileModification()
-        {       
+        {
+            List<bool> status = new List<bool> { };
             if (this.RequiredFileToModifedForWeb.Count == 0 && this.RequiredFileToModifedForAdmin.Count == 0 && this.RequiredFileToModifedForWeb.Count == this.RequiredFilesWeb.Length && this.RequiredFileToModifedForAdmin.Count==this.RequiredFilesAdmin.Length)
             {
                 VS.MessageBox.ShowError("Dev Error", "Something got Wrong buddy!! This error can be understood  by the only stupid owner of this extension!! call him at 8604470501");
@@ -160,6 +164,13 @@ namespace MWAdminRunner.CustomeService
                     if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[0]))//appsettings.json
                     {
                         bool isModifiedJson=ModifyJsonFiles(this.RequiredFileToModifedForAdmin[i],this.postGresPassword);
+                        if (isModifiedJson)
+                            status.Add(true);
+                        else
+                        {
+                            VS.MessageBox.ShowError("Oh FILE OP Error!!","Error While Editing the appsettings.json in Admin");
+                            return false;
+                        }
                     }
                     else if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[1]))//Program.cs
                     {
@@ -169,6 +180,7 @@ namespace MWAdminRunner.CustomeService
 
                         // Write the modified lines back to the file
                         File.WriteAllLines(RequiredFileToModifedForAdmin[i], modifiedLines);
+                        status.Append(true);
 
                     }
                     else if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[2]))//Properties/launchSettings.json
@@ -182,6 +194,7 @@ namespace MWAdminRunner.CustomeService
                        {
                             string jsonContent = File.ReadAllText(jsonFileFromDataHastoBeTaken);
                             File.WriteAllText(this.RequiredFileToModifedForAdmin[i], jsonContent);
+                            status.Add(true);
                         }
                         else
                         {
@@ -195,9 +208,20 @@ namespace MWAdminRunner.CustomeService
                     if (this.RequiredFileToModifedForWeb[i].Contains(this.RequiredFilesWeb[0]))//appsettings.json
                     {
                         bool isModifiedJson = ModifyJsonFiles(this.RequiredFileToModifedForWeb[i], this.postGresPassword);
+                        if (isModifiedJson)
+                            status.Add(true);
+                        else
+                        {
+                            VS.MessageBox.ShowError("Oh FILE OP Error!!", "Error While Editing the appsettings.json in Web");
+                            return false;
+                        }
                     }
                 }
-                return true;
+          
+                if (status.Where(s => s == true).ToList().Count != 3)
+                    return false;
+                else
+                    return true;
             }    
          
         }
@@ -231,6 +255,65 @@ namespace MWAdminRunner.CustomeService
                 }
             
             }
+        }
+
+
+        public async  Task<bool> BuildingSolution()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            var dte = (EnvDTE.DTE)ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE));
+
+            if (dte != null)
+            {
+            
+                // Start the build
+               dte.Solution.SolutionBuild.Build(true);
+
+                // Wait for the build to complete
+                // (You might need to implement a better waiting mechanism based on your requirements)
+                await Task.Delay(5000);
+
+                if (dte.Solution.SolutionBuild.LastBuildInfo == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                  await   VS.MessageBox.ShowErrorAsync("WTF! Build failed. But All Files are modified u can build manually", "Aree yaaar!!!! what the hell!!! you can run the project manually it will run fine.");
+                    return false;
+                }
+            }
+            else
+            {
+               await  VS.MessageBox.ShowErrorAsync("Unable to access DTE.", "Hmmm.. don`t know y this is error came ....");
+                return false;
+            }
+
+        }
+
+
+        public async Task<bool> SetMultipleStartupProjectsAsync()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            var dte = (DTE2)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
+            if (dte == null)
+            {
+               await VS.MessageBox.ShowErrorAsync("Error...", "Developer has no idea what is this error about..");
+                return false;
+            }
+
+            var solution = dte.Solution;
+
+            var solutionBuild = solution.SolutionBuild;
+            var o = solutionBuild.StartupProjects;
+
+            solutionBuild.StartupProjects =  this.startUpProject;
+
+            dte.ExecuteCommand("File.SaveAll");
+
+            return true;
         }
     }
 }
