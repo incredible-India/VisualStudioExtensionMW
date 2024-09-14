@@ -23,15 +23,17 @@ namespace MWAdminRunner.CustomeService
         private readonly string[] RequiredProjects = new string[] { "incadea.api.middleware.admin", "incadea.api.middleware.web" };
         private readonly string[] RequiredFilesAdmin = new string[] { "appsettings.json", "Program.cs", "Properties/launchSettings.json" };
         private readonly string[] RequiredFilesWeb = new string[] { "appsettings.json" };
-        private string postGresPassword = "Incadea@321";
+        private string postGresPassword = "postgres";
         private List<string> RequiredFileToModifedForAdmin = new List<string> { };
         private List<string> RequiredFileToModifedForWeb = new List<string> { };
         private readonly string lineToCommentInProgrameCSFile = "builder.Services.AddHostedService<RunBackGroundJob>();";
         private readonly string[] startUpProject = new string[] { "incadea.api.middleware.admin\\incadea.api.middleware.admin.csproj", "incadea.api.middleware.web\\incadea.api.middleware.web.csproj" };
 
-        public InfoDialogBox(IVsSolution vsSolution)
+        public InfoDialogBox(IVsSolution vsSolution,string postP)
         {
             _vsSolution = vsSolution;
+            if(postP != null)
+                this.postGresPassword = postP;
 
         }
 

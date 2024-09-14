@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using MWAdminRunner.CustomeService;
+using System.Windows.Forms;
 namespace MWAdminRunner
 {
 
@@ -13,36 +14,47 @@ namespace MWAdminRunner
     internal sealed class MyCommand : BaseCommand<MyCommand>
     {
       
-
+        private  string postgresPassword;
         private IVsSolution vsSolution;
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
           
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            InfoDialogBox ib = new InfoDialogBox(vsSolution);
-
-            List<string> currentSolutionInfo = ib.GetCurrentSolutionName();
-
-            if (currentSolutionInfo == null) {
-
-              await   VS.MessageBox.ShowErrorAsync("Solution File Not Found", "Unable to Find the Middleware SolutionFile, Check from ur side macha!!");
-            }
-            else
+            using (InputForm inputForm = new InputForm())
             {
-                 bool isRequiredFilesAreThere  =ib.CheckingRequiredFileForModification(currentSolutionInfo);
+               
+                if (inputForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.postgresPassword = inputForm.UserInput;
+                    // from this line cooment 
+                    InfoDialogBox ib = new InfoDialogBox(vsSolution, this.postgresPassword);
 
-                if (isRequiredFilesAreThere) {
+                    List<string> currentSolutionInfo = ib.GetCurrentSolutionName();
 
-                    bool filesModified = ib.RequiredFileModification();
-                    if (filesModified) {
-                        bool ProjectBuild = await ib.BuildingSolution();
-                        if (ProjectBuild) {
+                    if (currentSolutionInfo == null)
+                    {
 
-                          if (  await ib.SetMultipleStartupProjectsAsync())
+                        await VS.MessageBox.ShowErrorAsync("Solution File Not Found", "Unable to Find the Middleware SolutionFile, Check from ur side macha!!");
+                    }
+                    else
+                    {
+                        bool isRequiredFilesAreThere = ib.CheckingRequiredFileForModification(currentSolutionInfo);
+
+                        if (isRequiredFilesAreThere)
+                        {
+
+                            bool filesModified = ib.RequiredFileModification();
+                            if (filesModified)
                             {
-                                try
+                                bool ProjectBuild = await ib.BuildingSolution();
+                                if (ProjectBuild)
                                 {
-                                    List<string> jokes = new List<string>
+
+                                    if (await ib.SetMultipleStartupProjectsAsync())
+                                    {
+                                        try
+                                        {
+                                            List<string> jokes = new List<string>
         {
                                         "This Developer wanted to tell u one joke at final step, but he saw his salary and he is still laughing",
             "Why don’t some couples go to the gym? - Because some relationships don’t work out, ಕೆಲವು ಜೋಡಿಗಳು ಜಿಮ್ ಗೆ ಹೋಗುವುದಿಲ್ಲ ಏಕೆ? ಏಕೆಂದರೆ ಕೆಲವು ಸಂಬಂಧಗಳು ಕೆಲಸ ಮಾಡುವುದಿಲ್ಲ!",
@@ -67,34 +79,42 @@ namespace MWAdminRunner
              "What’s a common Indian’s favorite sport? - ‘Cricket’ and ‘Ludo’, because they both come with a lot of 'strategy' and 'drama'! ಸಾಮಾನ್ಯ ಭಾರತೀಯನಿಗೆ ಮೆಚ್ಚಿನ ಕ್ರೀಡೆ ಯಾವುದು? - 'ಕ್ರಿಕೆಟ್' ಮತ್ತು 'ಲುಡೋ', ಏಕೆಂದರೆ ಅವು ಎರಡೂ ಬಹಳಷ್ಟು 'ಆಯೋಜನೆ' ಮತ್ತು 'ನಾಟಕ' ಹೊಂದಿವೆ!",
             "Why don’t skeletons fight each other? - They don’t have the guts!, ಇಮ್ಮಡಿಗಳ ನಡುವೆ ಯಾಕೆ ಯುದ್ಧವಿಲ್ಲ? - ಅವರು ಜಿಗಿಯಲು ಸಿದ್ಧವಾಗಿಲ್ಲ!",
         };
-                                    Random random = new Random();
-                                    int randomIndex = random.Next(jokes.Count);
-                                    await VS.MessageBox.ShowWarningAsync("Enjoy madi 😊 Project setup done", $"{jokes[randomIndex]}");
-                                }
-                                catch (Exception)
-                                {
+                                            Random random = new Random();
+                                            int randomIndex = random.Next(jokes.Count);
+                                            await VS.MessageBox.ShowWarningAsync("Enjoy madi 😊 Project setup done", $"{jokes[randomIndex]}");
+                                        }
+                                        catch (Exception)
+                                        {
 
-                                    await VS.MessageBox.ShowWarningAsync("Enjoy madi 😊 Project setup done", "This Developer wanted to tell u one joke at final step, but he saw his salary and he is still laughing");
+                                            await VS.MessageBox.ShowWarningAsync("Enjoy madi 😊 Project setup done", "This Developer wanted to tell u one joke at final step, but he saw his salary and he is still laughing");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        await VS.MessageBox.ShowErrorAsync("Multiple Project Selection Error", "Bhaiii! facing problem to set mulitple project as startup project, all changes done ,only this step u do manually plz bhai in free u are using this extension at least this u can do urself");
+
+                                    }
                                 }
+
                             }
-                           else
+                            else
                             {
-                               await VS.MessageBox.ShowErrorAsync("Multiple Project Selection Error","Bhaiii! facing problem to set mulitple project as startup project, all changes done ,only this step u do manually plz bhai in free u are using this extension at least this u can do urself");
-                             
+                                await VS.MessageBox.ShowErrorAsync("Dont know What Happend !!!", "Something Got Wrong While Modifying the files");
                             }
                         }
-
+                        else
+                        {
+                            await VS.MessageBox.ShowErrorAsync("Kuch to Gadbad Hai", "Sorry Bro! something went wrong Please Contact at 8604470501 ");
+                        }
                     }
-                    else
-                    {
-                      await   VS.MessageBox.ShowErrorAsync("Dont know What Happend !!!", "Something Got Wrong While Modifying the files");
-                    }
+                    //to this can be copied and put out side else block of dialog box if in case u want to make ot work after user cancel the propmt
                 }
                 else
                 {
-                   await  VS.MessageBox.ShowErrorAsync("Kuch to Gadbad Hai", "Sorry Bro! something went wrong Please Contact at 8604470501 ");
+                    await VS.MessageBox.ShowWarningAsync("Cancel Why Bro!!!!", "now you need to manually edit password in appsettings.json or re-run extension.");
                 }
             }
+       
             
 
        
