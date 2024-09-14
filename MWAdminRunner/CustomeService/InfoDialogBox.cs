@@ -21,10 +21,10 @@ namespace MWAdminRunner.CustomeService
         private readonly string middleWareSolutionFileName = "incadea.api.middleware";
         private readonly uint maxProjectInsideProject = 100;
         private readonly string[] RequiredProjects = new string[] { "incadea.api.middleware.admin", "incadea.api.middleware.web" };
-        private readonly string[] RequiredFilesAdmin = new string[] { "appsettings.json","Program.cs", "Properties/launchSettings.json" };
+        private readonly string[] RequiredFilesAdmin = new string[] { "appsettings.json", "Program.cs", "Properties/launchSettings.json" };
         private readonly string[] RequiredFilesWeb = new string[] { "appsettings.json" };
-        private string postGresPassword = "HIMANSHUsharma@123";
-        private List<string>  RequiredFileToModifedForAdmin = new List<string> { };
+        private string postGresPassword = "Incadea@321";
+        private List<string> RequiredFileToModifedForAdmin = new List<string> { };
         private List<string> RequiredFileToModifedForWeb = new List<string> { };
         private readonly string lineToCommentInProgrameCSFile = "builder.Services.AddHostedService<RunBackGroundJob>();";
         private readonly string[] startUpProject = new string[] { "incadea.api.middleware.admin\\incadea.api.middleware.admin.csproj", "incadea.api.middleware.web\\incadea.api.middleware.web.csproj" };
@@ -75,20 +75,20 @@ namespace MWAdminRunner.CustomeService
             //"C:\\MW\\Datastream\\WAP-API Components\\incadea.API Middleware\\incadea.api.middleware.admin\\incadea.api.middleware.admin.csproj\\appsettings.json"
             //removing null values
             string[] allProjectsInsideSolutionWithPath = cProjects.Where(i => i != null).ToArray();
-            if(allProjectsInsideSolutionWithPath.Length > 0)
+            if (allProjectsInsideSolutionWithPath.Length > 0)
 
             {
-               // "C:/MW/Datastream/WAP-API Components/incadea.API Middleware/incadea.api.middleware.admin/appsettings.json"
+                // "C:/MW/Datastream/WAP-API Components/incadea.API Middleware/incadea.api.middleware.admin/appsettings.json"
                 //"C:\\MW\\Datastream\\WAP-API Components\\incadea.API Middleware\\incadea.api.middleware.admin\\appsettings.json"
                 //C:\MW\CoreLogs\WAP-API Components\incadea.API Middleware\incadea.api.middleware.admin
-                string[] allProjectInsideSolutionOnlyPath = allProjectsInsideSolutionWithPath.Select(i=>Path.GetDirectoryName(i)).ToArray();//damiler will get skipped
+                string[] allProjectInsideSolutionOnlyPath = allProjectsInsideSolutionWithPath.Select(i => Path.GetDirectoryName(i)).ToArray();//damiler will get skipped
                 string[] allProjectInsideSolutionWithoutPath = allProjectsInsideSolutionWithPath.Select(y => Path.GetFileNameWithoutExtension(y)).ToArray();
                 bool allPresent = this.RequiredProjects.All(element => allProjectInsideSolutionWithoutPath.Contains(element));
                 if (allPresent)
                 {
-                    int CountForAdmin=0;
+                    int CountForAdmin = 0;
                     int CountForWeb = 0;
-                    for (int i = 0; i< allProjectInsideSolutionOnlyPath.Length;i++)
+                    for (int i = 0; i < allProjectInsideSolutionOnlyPath.Length; i++)
                     {
                         //admin
                         if (allProjectInsideSolutionOnlyPath[i].Contains(this.RequiredProjects[0]))
@@ -96,14 +96,14 @@ namespace MWAdminRunner.CustomeService
                             for (int j = 0; j < this.RequiredFilesAdmin.Length; j++)
                             {
                                 var FilePathToCheckInsideProject = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[j]}").Replace('\\', '/');
-                                var isThere = File.Exists(FilePathToCheckInsideProject); 
-                                if(isThere)
-                                   {
+                                var isThere = File.Exists(FilePathToCheckInsideProject);
+                                if (isThere)
+                                {
                                     CountForAdmin++;
                                     this.RequiredFileToModifedForAdmin.Add(FilePathToCheckInsideProject);
                                 }
                             }
-                           
+
                         }
                         //web
                         if (allProjectInsideSolutionOnlyPath[i].Contains(this.RequiredProjects[1]))
@@ -112,17 +112,17 @@ namespace MWAdminRunner.CustomeService
                             {
                                 var FilePathToCheckInsideProjectWeb = (allProjectInsideSolutionOnlyPath[i] + $"\\{this.RequiredFilesAdmin[j]}").Replace('\\', '/');
                                 var isThereWeb = File.Exists(FilePathToCheckInsideProjectWeb);
-                                if(isThereWeb)
+                                if (isThereWeb)
                                 {
-                                   CountForWeb++;
+                                    CountForWeb++;
                                     this.RequiredFileToModifedForWeb.Add(FilePathToCheckInsideProjectWeb);
                                 }
                             }
 
                         }
                     }
-                    if(CountForWeb == this.RequiredFilesWeb.Length && CountForAdmin== this.RequiredFilesAdmin.Length)
-                            return true;
+                    if (CountForWeb == this.RequiredFilesWeb.Length && CountForAdmin == this.RequiredFilesAdmin.Length)
+                        return true;
                     else
                     {
                         VS.MessageBox.ShowError("File Not Found", "Oh! Some Required Files need to be modified are not found!!! [appsettings.json(Admin/Web),Programe.cs(Admin) ,launchsettings.json (Admin)]");
@@ -138,12 +138,12 @@ namespace MWAdminRunner.CustomeService
             }
             else
             {
-                VS.MessageBox.ShowError("Oh Bhai!!!",$"No project found inside the {GetSolutionName}.sln");
+                VS.MessageBox.ShowError("Oh Bhai!!!", $"No project found inside the {GetSolutionName}.sln");
                 return false;
             }
-        
 
-         
+
+
 
 
         }
@@ -152,23 +152,23 @@ namespace MWAdminRunner.CustomeService
         public bool RequiredFileModification()
         {
             List<bool> status = new List<bool> { };
-            if (this.RequiredFileToModifedForWeb.Count == 0 && this.RequiredFileToModifedForAdmin.Count == 0 && this.RequiredFileToModifedForWeb.Count == this.RequiredFilesWeb.Length && this.RequiredFileToModifedForAdmin.Count==this.RequiredFilesAdmin.Length)
+            if (this.RequiredFileToModifedForWeb.Count == 0 && this.RequiredFileToModifedForAdmin.Count == 0 && this.RequiredFileToModifedForWeb.Count == this.RequiredFilesWeb.Length && this.RequiredFileToModifedForAdmin.Count == this.RequiredFilesAdmin.Length)
             {
                 VS.MessageBox.ShowError("Dev Error", "Something got Wrong buddy!! This error can be understood  by the only stupid owner of this extension!! call him at 8604470501");
                 return false;
             }
             else
             { //Modification For Admin Files
-                for(int i=0;i<this.RequiredFileToModifedForAdmin.Count;i++)
+                for (int i = 0; i < this.RequiredFileToModifedForAdmin.Count; i++)
                 {
                     if (this.RequiredFileToModifedForAdmin[i].Contains(this.RequiredFilesAdmin[0]))//appsettings.json
                     {
-                        bool isModifiedJson=ModifyJsonFiles(this.RequiredFileToModifedForAdmin[i],this.postGresPassword);
+                        bool isModifiedJson = ModifyJsonFiles(this.RequiredFileToModifedForAdmin[i], this.postGresPassword);
                         if (isModifiedJson)
                             status.Add(true);
                         else
                         {
-                            VS.MessageBox.ShowError("Oh FILE OP Error!!","Error While Editing the appsettings.json in Admin");
+                            VS.MessageBox.ShowError("Oh FILE OP Error!!", "Error While Editing the appsettings.json in Admin");
                             return false;
                         }
                     }
@@ -189,18 +189,51 @@ namespace MWAdminRunner.CustomeService
                         //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
                         //var c = Directory.GetCurrentDirectory();
                         //var c = Directory.Exists("./.");
-                        var jsonFileFromDataHastoBeTaken = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "IISExpress.json").Replace('\\', '/'); ;
-                        if (File.Exists(jsonFileFromDataHastoBeTaken))
-                       {
-                            string jsonContent = File.ReadAllText(jsonFileFromDataHastoBeTaken);
-                            File.WriteAllText(this.RequiredFileToModifedForAdmin[i], jsonContent);
-                            status.Add(true);
-                        }
-                        else
-                        {
-                            VS.MessageBox.ShowError("DEV Error", "Launchsettings.json content could not be found in code dir...stupid dev Yaar!!! he cant even handle proper file path.");
-                        }
-                       
+                        // var jsonFileFromDataHastoBeTaken = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "IISExpress.json").Replace('\\', '/'); ;
+                        // if (File.Exists(jsonFileFromDataHastoBeTaken))
+                        //{
+                        //     string jsonContent = File.ReadAllText(jsonFileFromDataHastoBeTaken);
+                        //     File.WriteAllText(this.RequiredFileToModifedForAdmin[i], jsonContent);
+                        //     status.Add(true);
+                        // }
+                        // else
+                        // {
+                        //     VS.MessageBox.ShowError("DEV Error", "Launchsettings.json content could not be found in code dir...stupid dev Yaar!!! he cant even handle proper file path.");
+                        // }
+
+                        var iisExpress = "{\n" +
+"  \"iisSettings\": {\n" +
+"    \"windowsAuthentication\": false,\n" +
+"    \"anonymousAuthentication\": true,\n" +
+"    \"iisExpress\": {\n" +
+"      \"applicationUrl\": \" http://localhost:56494/\",\n" +
+"      \"sslPort\": 44390\n" +
+"    }\n" +
+"  },\n" +
+"  \"profiles\": {\n" +
+"    \"IIS Express\": {\n" +
+"      \"commandName\": \"IISExpress\",\n" +
+"      \"launchBrowser\": true,\n" +
+"      \"environmentVariables\": {\n" +
+"        \"ASPNETCORE_ENVIRONMENT\": \"Development\"\n" +
+"      }\n" +
+"    },\n" +
+"    \"incadea.api.middleware.admin\": {\n" +
+"      \"commandName\": \"Project\",\n" +
+"      \"launchBrowser\": true,\n" +
+"      \"environmentVariables\": {\n" +
+"        \"ASPNETCORE_ENVIRONMENT\": \"Development\"\n" +
+"      },\n" +
+"      \"applicationUrl\": \"https://localhost:5001;http://localhost:5000\"\n" +
+"    }\n" +
+"  }\n" +
+"}"
+;
+                        File.WriteAllText(this.RequiredFileToModifedForAdmin[i], iisExpress);
+                        status.Add(true);
+
+
+
                     }
                 }
                 for (int i = 0; i < this.RequiredFileToModifedForWeb.Count; i++)
@@ -217,16 +250,16 @@ namespace MWAdminRunner.CustomeService
                         }
                     }
                 }
-          
+
                 if (status.Where(s => s == true).ToList().Count != 3)
                     return false;
                 else
                     return true;
-            }    
-         
+            }
+
         }
 
-        private bool ModifyJsonFiles(string filepath,string ModifiedValue)
+        private bool ModifyJsonFiles(string filepath, string ModifiedValue)
         {
             {
                 string filePath = filepath;
@@ -253,12 +286,12 @@ namespace MWAdminRunner.CustomeService
                 {
                     return false;
                 }
-            
+
             }
         }
 
 
-        public async  Task<bool> BuildingSolution()
+        public async Task<bool> BuildingSolution()
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -266,9 +299,9 @@ namespace MWAdminRunner.CustomeService
 
             if (dte != null)
             {
-            
+
                 // Start the build
-               dte.Solution.SolutionBuild.Build(true);
+                dte.Solution.SolutionBuild.Build(true);
 
                 // Wait for the build to complete
                 // (You might need to implement a better waiting mechanism based on your requirements)
@@ -280,13 +313,13 @@ namespace MWAdminRunner.CustomeService
                 }
                 else
                 {
-                  await   VS.MessageBox.ShowErrorAsync("WTF! Build failed. But All Files are modified u can build manually", "Aree yaaar!!!! what the hell!!! you can run the project manually it will run fine.");
+                    await VS.MessageBox.ShowErrorAsync("WTF! Build failed. But All Files are modified u can build manually", "Aree yaaar!!!! what the hell!!! you can run the project manually it will run fine.");
                     return false;
                 }
             }
             else
             {
-               await  VS.MessageBox.ShowErrorAsync("Unable to access DTE.", "Hmmm.. don`t know y this is error came ....");
+                await VS.MessageBox.ShowErrorAsync("Unable to access DTE.", "Hmmm.. don`t know y this is error came ....");
                 return false;
             }
 
@@ -300,7 +333,7 @@ namespace MWAdminRunner.CustomeService
             var dte = (DTE2)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
             if (dte == null)
             {
-               await VS.MessageBox.ShowErrorAsync("Error...", "Developer has no idea what is this error about..");
+                await VS.MessageBox.ShowErrorAsync("Error...", "Developer has no idea what is this error about..");
                 return false;
             }
 
@@ -309,7 +342,7 @@ namespace MWAdminRunner.CustomeService
             var solutionBuild = solution.SolutionBuild;
             var o = solutionBuild.StartupProjects;
 
-            solutionBuild.StartupProjects =  this.startUpProject;
+            solutionBuild.StartupProjects = this.startUpProject;
 
             dte.ExecuteCommand("File.SaveAll");
 

@@ -17,5 +17,6 @@
   </Prerequisites>
   <Assets>
     <Asset Type="Microsoft.VisualStudio.VsPackage" Path="MWAdminRunner.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.Vsix" Path="Resources\IISExpress.json" />
   </Assets>
 </PackageManifest>
