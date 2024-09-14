@@ -3,7 +3,8 @@
     <Metadata>
         <Identity Id="MWAdminRunner.0125b84c-5178-498d-bee9-7110abaf5f1a" Version="1.0" Language="en-US" Publisher="Himanshu kumar Sharma" />
         <DisplayName>MWAdminRunner</DisplayName>
-        <Description xml:space="preserve">This Will Run Middleware Project Locally</Description>
+        <Description xml:space="preserve">This Will Run Middleware Project Locally . It will modify the required Files and run it locally . Made by Himanshu Kumar Sharma and Namya H S.</Description>
+        <MoreInfo>https://github.com/incredible-India/VisualStudioExtensionMW</MoreInfo>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>
         <Preview>true</Preview>
@@ -18,5 +19,6 @@
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.Vsix" d:Source="File" Path="Resources\IISExpress.json" />
     </Assets>
 </PackageManifest>

@@ -9,7 +9,7 @@ namespace MWAdminRunner
     {
         public const string Id = "MWAdminRunner.0125b84c-5178-498d-bee9-7110abaf5f1a";
         public const string Name = "MWAdminRunner";
-        public const string Description = @"This Will Run Middleware Project Locally";
+        public const string Description = @"This Will Run Middleware Project Locally . It will modify the required Files and run it locally . Made by Himanshu Kumar Sharma and Namya H S.";
         public const string Language = "en-US";
         public const string Version = "1.0";
         public const string Author = "Himanshu kumar Sharma";
