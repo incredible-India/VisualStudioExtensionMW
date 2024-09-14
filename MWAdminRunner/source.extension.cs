@@ -12,7 +12,7 @@ namespace MWAdminRunner
         public const string Description = @"This Will Run Middleware Project Locally . It will modify the required Files and run it locally . Made by Himanshu Kumar Sharma and Namya H S.";
         public const string Language = "en-US";
         public const string Version = "1.0";
-        public const string Author = "Himanshu kumar Sharma && Namya HS  ";
+        public const string Author = "Himanshu kumar Sharma && Namya HS";
         public const string Tags = "";
     }
 }

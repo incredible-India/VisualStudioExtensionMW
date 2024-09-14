@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-	<Metadata>
-		<Identity Id="MWAdminRunner.0125b84c-5178-498d-bee9-7110abaf5f1a" Version="1.0" Language="en-US" Publisher="Himanshu kumar Sharma &amp;&amp; Namya HS  " />
-		<DisplayName>MWAdminRunner</DisplayName>
-		<Description xml:space="preserve">This Will Run Middleware Project Locally . It will modify the required Files and run it locally . Made by Himanshu Kumar Sharma and Namya H S.</Description>
-		<MoreInfo>https://github.com/incredible-India/VisualStudioExtensionMW</MoreInfo>
-		<Icon>Resources\Icon.png</Icon>
-		<PreviewImage>Resources\Icon.png</PreviewImage>
-		<Preview>true</Preview>
-	</Metadata>
-	<Installation>
-		<InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
-			<ProductArchitecture>amd64</ProductArchitecture>
-		</InstallationTarget>
-	</Installation>
-	<Prerequisites>
-		<Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,)" DisplayName="Visual Studio core editor" />
-	</Prerequisites>
-	<Assets>
-		<Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-		<Asset Type="Microsoft.VisualStudio.Vsix" d:Source="File" Path="Resources\IISExpress.json" />
-	</Assets>
+    <Metadata>
+        <Identity Id="MWAdminRunner.0125b84c-5178-498d-bee9-7110abaf5f1a" Version="1.0" Language="en-US" Publisher="Himanshu kumar Sharma" />
+        <DisplayName>MWAdminRunner</DisplayName>
+        <Description xml:space="preserve">This Will Run Middleware Project Locally . It will modify the required Files and run it locally . Made by Himanshu Kumar Sharma and Namya H S.</Description>
+        <MoreInfo>https://github.com/incredible-India/VisualStudioExtensionMW</MoreInfo>
+        <Icon>Resources\Icon.png</Icon>
+        <PreviewImage>Resources\Icon.png</PreviewImage>
+        <Preview>true</Preview>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.Vsix" d:Source="File" Path="Resources\IISExpress.json" />
+    </Assets>
 </PackageManifest>
